@@ -1,5 +1,5 @@
 import random
-from game.shared.point import Point
+from point import Point
 
 class Director:
     """A person who directs the game. 

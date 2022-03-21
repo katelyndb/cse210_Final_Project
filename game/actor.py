@@ -1,6 +1,5 @@
-import constants
-from shared.color import Color
-from shared.point import Point
+from game.shared.color import Color
+from game.shared.point import Point
 
 
 class Actor:
