@@ -1,5 +1,6 @@
 import random
-from game.shared.point import Point
+from point import Point
+import pyray
 
 class Director:
     """A person who directs the game. 
@@ -43,9 +44,9 @@ class Director:
         Args:
             cast (Cast): The cast of actors.
         """
-        robot = cast.get_first_actor("robots")
+        turtle = cast.get_first_actor("turtles")
         velocity = self._keyboard_service.get_direction()
-        robot.set_velocity(velocity)        
+        turtle.set_velocity(velocity)        
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
@@ -54,41 +55,20 @@ class Director:
             cast (Cast): The cast of actors.
         """
         banner = cast.get_first_actor("banners")
-        robot = cast.get_first_actor("robots")
-        artifacts = cast.get_actors("artifacts")
+        turtle = cast.get_first_actor("turtles")
 
-        banner.set_text("")
+        message = f"Score: {self.score}"
+        banner.set_text(message)
+
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
-        robot.move_next(max_x, max_y)
+        turtle.move_next(max_x, max_y)
 
-        for artifact in artifacts:
-            artifact.move_next(max_x, max_y)
+        turtle.set_velocity(Point(0,-5))
+        turtle.move_next(max_x, max_y)
 
-            # Find the difference between artifact and robot.
-            delta = artifact.get_position().subtract(robot.get_position())
-
-            # If the difference between and artifact and robot is less than 25,
-            # restart it at a random place at the top of the game screen.
-
-            # Displays score on top of the screen
-            message = f"Score: {self.score}"
-            banner.set_text(message)
-
-            # Detect collisions
-            if abs(delta.get_x()) < 25 and abs(delta.get_y()) < 25:
-                artifact.set_position(Point(random.randint(1, self._video_service.get_width()), 0))
-                # Update score based upon being a gem or rock
-                if artifact._text == "*":
-                    self.score += 1
-                if artifact._text == "o":
-                    self.score -= 1
-
-            # If the artifact makes it to the bottom of the screen, assign it to a new random 
-            # position at the top of the screen.
-            if robot.get_position().equals(artifact.get_position()):
-                artifact.set_position(Point(random.randint(1, self._video_service.get_width()), 0))
-                
+        # texture = pyray.load_texture("turtle.png")
+        # pyray.draw_texture(texture, 150, 150, (255, 255, 255))
                    
         
     def _do_outputs(self, cast):

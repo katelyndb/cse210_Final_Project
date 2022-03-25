@@ -28,7 +28,7 @@ class VideoService:
         the beginning of the game's output phase.
         """
         pyray.begin_drawing()
-        pyray.clear_background(pyray.BLACK)
+        pyray.clear_background(pyray.Color(186,250,246))
         if self._debug == True:
             self._draw_grid()
     
