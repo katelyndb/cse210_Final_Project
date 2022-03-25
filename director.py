@@ -67,8 +67,8 @@ class Director:
         turtle.set_velocity(Point(0,-5))
         turtle.move_next(max_x, max_y)
 
-        # texture = pyray.load_texture("turtle.png")
-        # pyray.draw_texture(texture, 150, 150, (255, 255, 255))
+        texture = pyray.load_texture("turtle.png")
+        t = pyray.draw_texture(texture, 150, 150, (255, 255, 255))
                    
         
     def _do_outputs(self, cast):

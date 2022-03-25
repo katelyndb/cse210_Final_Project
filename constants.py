@@ -1,0 +1,1 @@
+TURTLE_IMAGE = "turtles.jpg"
