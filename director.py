@@ -1,6 +1,7 @@
 import random
 from point import Point
 import pyray
+from color import Color
 
 class Director:
     """A person who directs the game. 
@@ -22,7 +23,7 @@ class Director:
         self._keyboard_service = keyboard_service
         self._video_service = video_service
         
-    def start_game(self, cast):
+    def start_game(self, cast, castSprite):
         """Starts the game using the given cast. Runs the main game loop.
 
         Args:
@@ -33,22 +34,25 @@ class Director:
 
         self._video_service.open_window()
         while self._video_service.is_window_open():
-            self._get_inputs(cast)
-            self._do_updates(cast)
-            self._do_outputs(cast)
+            self._get_inputs(cast, castSprite)
+            self._do_updates(cast, castSprite)
+            self._do_outputs(cast, castSprite)
         self._video_service.close_window()
 
-    def _get_inputs(self, cast):
+    def _get_inputs(self, cast, castSprite):
         """Gets directional input from the keyboard and applies it to the robot.
         
         Args:
             cast (Cast): The cast of actors.
         """
         turtle = cast.get_first_actor("turtles")
-        velocity = self._keyboard_service.get_direction()
-        turtle.set_velocity(velocity)        
+        t = castSprite.get_first_actor("ts")
 
-    def _do_updates(self, cast):
+        velocity = self._keyboard_service.get_direction()
+        turtle.set_velocity(velocity) 
+        t.set_velocity(velocity)       
+
+    def _do_updates(self, cast, castSprite):
         """Updates the robot's position and resolves any collisions with artifacts.
         
         Args:
@@ -56,6 +60,7 @@ class Director:
         """
         banner = cast.get_first_actor("banners")
         turtle = cast.get_first_actor("turtles")
+        t = castSprite.get_first_actor("ts")
 
         message = f"Score: {self.score}"
         banner.set_text(message)
@@ -64,14 +69,13 @@ class Director:
         max_y = self._video_service.get_height()
         turtle.move_next(max_x, max_y)
 
-        turtle.set_velocity(Point(0,-5))
-        turtle.move_next(max_x, max_y)
+        t.move_next(max_x, max_y)
 
-        texture = pyray.load_texture("turtle.png")
-        t = pyray.draw_texture(texture, 150, 150, (255, 255, 255))
-                   
+        turtle.set_velocity(Point(0,-4))
+        turtle.move_next(max_x, max_y)
+                 
         
-    def _do_outputs(self, cast):
+    def _do_outputs(self, cast, castSprite):
         """Draws the actors on the screen.
         
         Args:
@@ -79,5 +83,7 @@ class Director:
         """
         self._video_service.clear_buffer()
         actors = cast.get_all_actors()
+        actors2 = castSprite.get_first_actor("ts")
         self._video_service.draw_actors(actors)
+        self._video_service.draw_sprite(actors2)
         self._video_service.flush_buffer()

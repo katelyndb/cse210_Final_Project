@@ -19,6 +19,7 @@ class Sprite:
     """
     # A static variable to store all of the textures so we only load them once
     textures = {}
+    
     def __init__(self):
         """Constructs a new Actor."""
         self._texture = "missing.png"
@@ -32,6 +33,7 @@ class Sprite:
         self._rotation = 0
         self._scale = 2
         self._can_move_off_screen = False
+
     def load_texture(self):
         if self._original_texture not in Sprite.textures.keys():
             self._texture = pyray.load_texture(str(os.path.join(SPRITE_LOC,self._original_texture)))
@@ -46,6 +48,7 @@ class Sprite:
             Point: The actor's font size.
         """
         return (self._width,self._height)
+        
     def get_position(self):
         """Gets the actor's position in 2d space.
         

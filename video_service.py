@@ -44,6 +44,13 @@ class VideoService:
         font_size = actor.get_font_size()
         color = actor.get_color().to_tuple()
         pyray.draw_text(text, x, y, font_size, color)
+
+    def draw_sprite(self, actor):
+        texture = actor.get_texture()
+        x = actor.get_position().get_x()
+        y = actor.get_position().get_y()
+        
+        pyray.draw_texture(texture, x, y, (255, 255, 255))
         
     def draw_actors(self, actors):
         """Draws the text for the given list of actors on the screen.
