@@ -54,8 +54,6 @@ def main():
     cast.add_actor("turtles", turtle)
 
     # create the tutle sprite
-    x = int(MAX_X / 2)
-    y = int(MAX_Y / 2)
     position = Point(400, 400)
     t = Sprite()
     t.set_texture("turtle.png")
