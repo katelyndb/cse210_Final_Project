@@ -23,7 +23,7 @@ class Director:
         self._keyboard_service = keyboard_service
         self._video_service = video_service
         
-    def start_game(self, cast, castSprite, cast2):
+    def start_game(self, cast, castSprite):
         """Starts the game using the given cast. Runs the main game loop.
 
         Args:
@@ -33,52 +33,49 @@ class Director:
         self.score = 0
         self._video_service.open_window()
         while self._video_service.is_window_open():
-            self._get_inputs(cast, castSprite, cast2)
-            self._do_updates(cast, castSprite, cast2)
-            self._do_outputs(cast, castSprite, cast2)
+            self._get_inputs(cast, castSprite)
+            self._do_updates(cast, castSprite)
+            self._do_outputs(cast, castSprite)
         self._video_service.close_window()
 
-    def _get_inputs(self, cast, castSprite, cast2):
+    def _get_inputs(self, cast, castSprite):
         """Gets directional input from the keyboard and applies it to the robot.
         
         Args:
             cast (Cast): The cast of actors.
         """
-        # turtle = cast.get_first_actor("turtles")
-        t = castSprite.get_first_actor("ts")
-        velocity = self._keyboard_service.get_direction()
-        # turtle.set_velocity(velocity) 
-        t.set_velocity(velocity)       
+        turtle = castSprite.get_first_actor("turtles")
+        velocity = self._keyboard_service.get_direction() 
+        turtle.set_velocity(velocity)       
 
-    def _do_updates(self, cast, castSprite, cast2):
+    def _do_updates(self, cast, castSprite):
         """Updates the robot's position and resolves any collisions with artifacts.
         
         Args:
             cast (Cast): The cast of actors.
         """
         banner = cast.get_first_actor("banners")
-        # turtle = cast.get_first_actor("turtles")
-        t = castSprite.get_first_actor("ts")
-        sharks = cast2.get_all_actors()
+        turtle = castSprite.get_first_actor("turtles")
+        sharks = castSprite.get_actors("sharks")
+
         message = f"Score: {self.score}"
         banner.set_text(message)
 
+        # Allows user to use the space bar to move turtle down.
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
-        # turtle.move_next(max_x, max_y)
+        turtle.move_next(max_x, max_y)
 
-        t.move_next(max_x, max_y)
-        # turtle.set_velocity(Point(0,-4))
-        # turtle.move_next(max_x, max_y)
-                 
-        t.set_velocity(Point(0,-4))
-        t.move_next(max_x, max_y)
+        # Gives the turtle the floating affect, moving upward.
+        turtle.set_velocity(Point(0,-4))
+        turtle.move_next(max_x, max_y)
 
-        for s in sharks:
-            s.move_next(max_x, max_y)
+        # Moves each shark in the group across the screen, left.
+        for shark in sharks:
+            shark.move_next(max_x, max_y)
 
 
-    def _do_outputs(self, cast, castSprite, cast2):
+    def _do_outputs(self, cast, castSprite):
         """Draws the actors on the screen.
         
         Args:
@@ -86,10 +83,8 @@ class Director:
         """
         self._video_service.clear_buffer()
         actors = cast.get_all_actors()
-        actors2 = castSprite.get_first_actor("ts")
-        actors3 = cast2.get_all_actors()
+        actors2 = castSprite.get_all_actors()
 
         self._video_service.draw_actors(actors)
-        self._video_service.draw_sprite(actors2)
-        self._video_service.draw_sprites(actors3)
+        self._video_service.draw_sprites(actors2)
         self._video_service.flush_buffer()
