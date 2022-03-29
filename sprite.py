@@ -32,7 +32,7 @@ class Sprite:
         self._velocity = Point(0, 0)
         self._rotation = 0
         self._scale = 2
-        self._can_move_off_screen = False
+        self._can_move_off_screen = True
 
     def load_texture(self):
         if self._original_texture not in Sprite.textures.keys():
@@ -81,7 +81,7 @@ class Sprite:
         """
         return self._velocity
     
-    def move_next(self, max_x, max_y,wrap=False):
+    def move_next(self, max_x, max_y,wrap=True):
         """Moves the actor to its next position according to its velocity. Will wrap the position 
         from one side of the screen to the other when it reaches the given maximum x and y values.
         

@@ -1,4 +1,4 @@
-import constants
+from constants import *
 from color import Color
 from point import Point
 

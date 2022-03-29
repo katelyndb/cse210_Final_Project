@@ -1,3 +1,5 @@
+import random
+
 class Cast:
     """A collection of actors.
 
@@ -38,7 +40,20 @@ class Cast:
         if group in self._actors.keys():
             results = self._actors[group].copy()
         return results
-    
+
+    def get_random_num_actors(self, group):
+        '''Gets a random number of actors from the group to display'''
+        results = []
+        r = []
+        if group in self._actors.keys():
+            x = random.randint(3,5)
+            r = self._actors[group].copy()
+            for n in range(x):
+                results.append(r[n])
+
+            # results = (random.choices(self._actors[group], k=4))
+        return results
+        
     def get_all_actors(self):
         """Gets all of the actors in the cast.
         
