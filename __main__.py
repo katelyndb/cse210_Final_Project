@@ -30,8 +30,8 @@ def main():
     banner.set_position(Point(CELL_SIZE, 0))
     cast.add_actor("banners", banner)
 
-    # create the tutle sprite
-    position = Point(400, 400)
+    # create the turtle sprite
+    position = Point(80, 400)
     turtle = Sprite()
     turtle.set_texture("turtle3.png")
     turtle.set_size((16,16))
@@ -42,7 +42,7 @@ def main():
 
     # Create a group of shark sprites.
     shark_list = ["shark_image.png","Whale_image.png", "Stingray_image.png" ]
-    for n in range(30):
+    for n in range(4):
         p = Point(800, random.randint(100,900))
         shark = Sprite()
         shark.set_texture(random.choice(shark_list))
