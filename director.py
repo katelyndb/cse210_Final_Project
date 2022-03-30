@@ -69,7 +69,7 @@ class Director:
 
         # Gives the turtle the floating affect, moving upward.
         turtle.set_velocity(Point(0,-self._count_speed))
-        turtle.move_next(max_x, max_y)
+        turtle.move_next(max_x, max_y, False)
         self._count_speed += 1
 
         # Moves each shark in the group across the screen, left.

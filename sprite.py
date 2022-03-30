@@ -32,7 +32,7 @@ class Sprite:
         self._velocity = Point(0, 0)
         self._rotation = 0
         self._scale = 2
-        self._can_move_off_screen = True
+        self._can_move_off_screen = False
 
     def load_texture(self):
         if self._original_texture not in Sprite.textures.keys():
