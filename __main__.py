@@ -41,10 +41,11 @@ def main():
     castSprite.add_actor("turtles", turtle)
 
     # Create a group of shark sprites.
-    for n in range(3):
+    shark_list = ["shark_image.png","Whale_image.png", "Stingray_image.png" ]
+    for n in range(30):
         p = Point(800, random.randint(100,900))
         shark = Sprite()
-        shark.set_texture("shark_image.png")
+        shark.set_texture(random.choice(shark_list))
         shark.set_position(p)
         # shark.set_size((0,0))
         # shark.set_velocity(Point(random.randint(-7,-4),0))
