@@ -20,7 +20,7 @@ class KeyboardService:
         """
         self._cell_size = cell_size
 
-    def get_direction(self):
+    def get_direction(self, count):
         """Gets the selected direction based on the currently pressed keys.
 
         Returns:
@@ -36,6 +36,7 @@ class KeyboardService:
         #     dx = 1
         
         if pyray.is_key_down(pyray.KEY_SPACE):
+            count = 0
             dy = 1
         
         # if pyray.is_key_down(pyray.KEY_DOWN):
@@ -45,4 +46,4 @@ class KeyboardService:
         direction = Point(dx, dy)
         direction = direction.scale(self._cell_size)
         
-        return direction
+        return direction, count

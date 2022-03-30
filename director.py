@@ -22,6 +22,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self._count_speed = 0
         
     def start_game(self, cast, castSprite):
         """Starts the game using the given cast. Runs the main game loop.
@@ -45,7 +46,7 @@ class Director:
             cast (Cast): The cast of actors.
         """
         turtle = castSprite.get_first_actor("turtles")
-        velocity = self._keyboard_service.get_direction() 
+        velocity, self._count_speed = self._keyboard_service.get_direction(self._count_speed) 
         turtle.set_velocity(velocity)       
 
     def _do_updates(self, cast, castSprite):
@@ -67,8 +68,9 @@ class Director:
         turtle.move_next(max_x, max_y)
 
         # Gives the turtle the floating affect, moving upward.
-        turtle.set_velocity(Point(0,-4))
+        turtle.set_velocity(Point(0,-self._count_speed))
         turtle.move_next(max_x, max_y)
+        self._count_speed += 1
 
         # Moves each shark in the group across the screen, left.
         for shark in sharks:
