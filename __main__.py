@@ -61,6 +61,13 @@ def main():
     # turtle.set_velocity(Point(1,2))
     castSprite.add_actor("turtles", turtle)
 
+    background = Sprite()
+    background.set_texture("underwater_test.png")
+    background.set_size((16,16))
+    background.set_position(Point(400,400))
+    background._can_move_off_screen = False
+    castSprite.add_actor("backgrounds", background)
+
     # Create a group of shark sprites.
     for n in range(4):
         p = Point(800, random.randint(0, 550))
