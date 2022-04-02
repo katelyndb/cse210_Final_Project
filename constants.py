@@ -14,3 +14,4 @@ CAPTION = "Turtle"
 WHITE = Color(255, 255, 255)
 
 SHARK_LIST = ["shark_image.png","Whale_image.png", "Stingray_image.png" ]
+WELCOME_TURTLES = ["Turtle_egg.png","happy_turtle.png"]

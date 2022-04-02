@@ -1,6 +1,7 @@
 import os
 import random
 import pyray
+import raylib
 
 from actor import Actor
 from cast import Cast
@@ -21,6 +22,25 @@ def main():
     # Create the cast.
     cast = Cast()
     castSprite = Cast()
+
+    #Creates the Welcome Screen
+
+    welcome_background = Sprite()
+    welcome_background.set_texture('water.png')
+    welcome_background.set_position(Point(0, 0))
+    welcome_background.set_size((150,150))
+    castSprite.add_actor("welcome_background", welcome_background)
+
+
+
+    welcome_turtle = Sprite()
+    welcome_turtle.set_texture(random.choice(WELCOME_TURTLES))
+    welcome_turtle.set_position(Point(500, 250))
+    welcome_turtle.set_size((150,150))
+    castSprite.add_actor("welcome_turtle", welcome_turtle)
+
+
+   
 
     # Create the banner for the points.
     banner = Actor()
@@ -51,6 +71,8 @@ def main():
         # shark.set_velocity(Point(random.randint(-7,-4),0))
         shark.set_velocity(Point(random.randint(-7,-4), 0))
         castSprite.add_actor("sharks", shark)
+
+    
 
 
     # Start the game.
