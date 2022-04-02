@@ -71,7 +71,7 @@ class Director:
         # Allows user to use the space bar to move turtle down.
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
-        turtle.move_next(max_x, max_y)
+        turtle.move_next(max_x, max_y, False)
 
         # Gives the turtle the floating affect, moving upward.
         turtle.set_velocity(Point(0,-self._count_speed))
@@ -86,7 +86,8 @@ class Director:
             shark.move_next(max_x, max_y, False)
 
             if shark.get_position().get_x() < -150:
-                shark.set_position(Point(MAX_X, random.randint(100,900)))
+                shark.set_position(Point(MAX_X, random.randint(0, 550)))
+                shark.set_velocity(Point(random.randint(-7,-4), 0))
 
 
     def _do_outputs(self, cast, castSprite):

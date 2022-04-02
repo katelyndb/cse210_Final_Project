@@ -44,7 +44,7 @@ def main():
     # Create a group of shark sprites.
     shark_list = ["shark_image.png","Whale_image.png", "Stingray_image.png" ]
     for n in range(4):
-        p = Point(800, random.randint(100,900))
+        p = Point(800, random.randint(0, 550))
         shark = Sprite()
         shark.set_texture(random.choice(shark_list))
         shark.set_position(p)
