@@ -26,6 +26,7 @@ class Director:
         self._video_service = video_service
         self._count_speed = 0
         self._hit_ceiling = False
+        self._collision = False
 
         self.shark_list = ["shark_image.png","Whale_image.png", "Stingray_image.png" ]
     
@@ -88,6 +89,12 @@ class Director:
             if shark.get_position().get_x() < -150:
                 shark.set_position(Point(MAX_X, random.randint(0, 550)))
                 shark.set_velocity(Point(random.randint(-7,-4), 0))
+
+            if shark.get_position() == turtle.get_position():
+                self._collision = True
+                print("collision")
+
+        
 
 
     def _do_outputs(self, cast, castSprite):
