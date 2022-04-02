@@ -36,6 +36,7 @@ def main():
     turtle.set_texture("turtle3.png")
     turtle.set_size((16,16))
     turtle.set_position(position)
+    turtle._can_move_off_screen = False
     # turtle.set_texture_point((14*16,21*16))        # Not sure if we need these two lines of code.
     # turtle.set_velocity(Point(1,2))
     castSprite.add_actor("turtles", turtle)

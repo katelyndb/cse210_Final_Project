@@ -32,7 +32,7 @@ class Sprite:
         self._velocity = Point(0, 0)
         self._rotation = 0
         self._scale = 2
-        self._can_move_off_screen = False
+        self._can_move_off_screen = True
 
     def load_texture(self):
         if self._original_texture not in Sprite.textures.keys():
@@ -89,6 +89,7 @@ class Sprite:
             max_x (int): The maximum x value.
             max_y (int): The maximum y value.
         """
+            
         if wrap:
             x = (self._position.get_x() + self._velocity.get_x()) % max_x
             y = (self._position.get_y() + self._velocity.get_y()) % max_y

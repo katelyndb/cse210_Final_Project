@@ -2,6 +2,8 @@ import random
 from point import Point
 import pyray
 from color import Color
+from constants import *
+from sprite import Sprite
 
 class Director:
     """A person who directs the game. 
@@ -23,6 +25,10 @@ class Director:
         self._keyboard_service = keyboard_service
         self._video_service = video_service
         self._count_speed = 0
+        self._hit_ceiling = False
+
+        self.shark_list = ["shark_image.png","Whale_image.png", "Stingray_image.png" ]
+    
         
     def start_game(self, cast, castSprite):
         """Starts the game using the given cast. Runs the main game loop.
@@ -72,9 +78,15 @@ class Director:
         turtle.move_next(max_x, max_y, False)
         self._count_speed += 1
 
+        if turtle.get_position().get_y() <= 1:
+            self._hit_ceiling = True
+
         # Moves each shark in the group across the screen, left.
         for shark in sharks:
-            shark.move_next(max_x, max_y)
+            shark.move_next(max_x, max_y, False)
+
+            if shark.get_position().get_x() < -150:
+                shark.set_position(Point(MAX_X, random.randint(100,900)))
 
 
     def _do_outputs(self, cast, castSprite):
@@ -90,3 +102,8 @@ class Director:
         self._video_service.draw_actors(actors)
         self._video_service.draw_sprites(actors2)
         self._video_service.flush_buffer()
+
+        # # This will help get stop the velocity of all the objects
+        # if self._hit_ceiling == True:
+        #     for sprite in castSprite.get_all_actors():
+        #         sprite._velocity = Point(0, 0)
