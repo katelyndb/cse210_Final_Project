@@ -44,7 +44,8 @@ class Director:
         while not pyray.is_key_down(pyray.KEY_SPACE):
             self._video_service.clear_buffer()
         
-            actors = cast.get_first_actor("banner_welcome")
+            welcome_banner = cast.get_first_actor("banner_welcome")
+            start_banner = cast.get_first_actor("banner_start")
             # actors2 = castSprite.get_all_actors()
             welcome_turtle = castWelcome.get_first_actor("welcome_turtle")
             water = castWelcome.get_first_actor("welcome_background")
@@ -52,7 +53,8 @@ class Director:
 
             self._video_service.draw_sprite(water)
             self._video_service.draw_sprite(welcome_turtle)
-            self._video_service.draw_actor(actors)
+            self._video_service.draw_actor(welcome_banner)
+            self._video_service.draw_actor(start_banner)
             self._video_service.flush_buffer()
 
         while self._video_service.is_window_open():
@@ -129,7 +131,10 @@ class Director:
         
         actors = cast.get_first_actor("banners")
         actors2 = castSprite.get_all_actors()
+        actors2.pop(0)
+        background = castSprite.get_first_actor("background")
 
+        self._video_service.draw_sprite(background)
         self._video_service.draw_actor(actors)
         self._video_service.draw_sprites(actors2)
         self._video_service.flush_buffer()

@@ -48,6 +48,13 @@ def main():
     welcome_banner.set_position(Point(CELL_SIZE, 300))
     cast.add_actor("banner_welcome", welcome_banner)
 
+    start_banner = Actor()
+    start_banner.set_text("Press space to start...")
+    start_banner.set_font_size(FONT_SIZE)
+    start_banner.set_color(Color(169, 169, 169))
+    start_banner.set_position(Point(CELL_SIZE, 500))
+    cast.add_actor("banner_start", start_banner)
+
     # Create the banner for the points.
     banner = Actor()
     banner.set_text("")
@@ -55,6 +62,12 @@ def main():
     banner.set_color(Color(169, 169, 169))
     banner.set_position(Point(CELL_SIZE, 0))
     cast.add_actor("banners", banner)
+
+    background = Sprite()
+    background.set_texture('underwater.png')
+    background.set_position(Point(0, 0))
+    background.set_size((150,150))
+    castSprite.add_actor("background", background)
 
     # create the turtle sprite
     position = Point(80, 400)
@@ -66,13 +79,6 @@ def main():
     # turtle.set_texture_point((14*16,21*16))        # Not sure if we need these two lines of code.
     # turtle.set_velocity(Point(1,2))
     castSprite.add_actor("turtles", turtle)
-
-    background = Sprite()
-    background.set_texture("underwater_test.png")
-    background.set_size((16,16))
-    background.set_position(Point(400,400))
-    background._can_move_off_screen = False
-    castSprite.add_actor("backgrounds", background)
 
     # Create a group of shark sprites.
     for n in range(4):
