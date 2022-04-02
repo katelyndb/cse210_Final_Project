@@ -89,6 +89,7 @@ class Director:
             if shark.get_position().get_x() < -150:
                 shark.set_position(Point(MAX_X, random.randint(0, 550)))
                 shark.set_velocity(Point(random.randint(-7,-4), 0))
+                shark.set_texture(random.choice(SHARK_LIST))
 
             if shark.get_position() == turtle.get_position():
                 self._collision = True
