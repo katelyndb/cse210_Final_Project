@@ -43,7 +43,7 @@ class VideoService:
         y = actor.get_position().get_y()
         font_size = actor.get_font_size()
         color = actor.get_color().to_tuple()
-        pyray.draw_text(text, x, y, font_size, color)
+        pyray.draw_text(text, x, y, font_size, (255, 255, 255, 255))
 
     def draw_sprite(self, actor):
         texture = actor.get_texture()

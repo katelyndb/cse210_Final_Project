@@ -31,7 +31,7 @@ class Director:
         self.shark_list = ["shark_image.png","Whale_image.png", "Stingray_image.png" ]
     
         
-    def start_game(self, cast, castSprite):
+    def start_game(self, cast, castSprite, castWelcome):
         """Starts the game using the given cast. Runs the main game loop.
 
         Args:
@@ -40,6 +40,21 @@ class Director:
         # I created the score here.
         self.score = 0
         self._video_service.open_window()
+
+        while not pyray.is_key_down(pyray.KEY_SPACE):
+            self._video_service.clear_buffer()
+        
+            actors = cast.get_first_actor("banner_welcome")
+            # actors2 = castSprite.get_all_actors()
+            welcome_turtle = castWelcome.get_first_actor("welcome_turtle")
+            water = castWelcome.get_first_actor("welcome_background")
+            
+
+            self._video_service.draw_sprite(water)
+            self._video_service.draw_sprite(welcome_turtle)
+            self._video_service.draw_actor(actors)
+            self._video_service.flush_buffer()
+
         while self._video_service.is_window_open():
             self._get_inputs(cast, castSprite)
             self._do_updates(cast, castSprite)
@@ -111,10 +126,11 @@ class Director:
             cast (Cast): The cast of actors.
         """
         self._video_service.clear_buffer()
-        actors = cast.get_all_actors()
+        
+        actors = cast.get_first_actor("banners")
         actors2 = castSprite.get_all_actors()
 
-        self._video_service.draw_actors(actors)
+        self._video_service.draw_actor(actors)
         self._video_service.draw_sprites(actors2)
         self._video_service.flush_buffer()
 

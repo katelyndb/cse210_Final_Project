@@ -22,25 +22,31 @@ def main():
     # Create the cast.
     cast = Cast()
     castSprite = Cast()
+    castWelcome = Cast()
 
     #Creates the Welcome Screen
 
     welcome_background = Sprite()
-    welcome_background.set_texture('water.png')
+    welcome_background.set_texture('underwater.png')
     welcome_background.set_position(Point(0, 0))
     welcome_background.set_size((150,150))
-    castSprite.add_actor("welcome_background", welcome_background)
+    castWelcome.add_actor("welcome_background", welcome_background)
 
 
 
     welcome_turtle = Sprite()
     welcome_turtle.set_texture(random.choice(WELCOME_TURTLES))
-    welcome_turtle.set_position(Point(500, 250))
+    welcome_turtle.set_position(Point(550, 250))
     welcome_turtle.set_size((150,150))
-    castSprite.add_actor("welcome_turtle", welcome_turtle)
+    castWelcome.add_actor("welcome_turtle", welcome_turtle)
 
 
-   
+    welcome_banner = Actor()
+    welcome_banner.set_text("Welcome to the Aquarium!")
+    welcome_banner.set_font_size(FONT_SIZE)
+    welcome_banner.set_color(Color(169, 169, 169))
+    welcome_banner.set_position(Point(CELL_SIZE, 300))
+    cast.add_actor("banner_welcome", welcome_banner)
 
     # Create the banner for the points.
     banner = Actor()
@@ -86,7 +92,7 @@ def main():
     keyboard_service = KeyboardService(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
     director = Director(keyboard_service, video_service)
-    director.start_game(cast, castSprite)
+    director.start_game(cast, castSprite, castWelcome)
 
 
 if __name__ == "__main__":
